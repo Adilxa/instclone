@@ -49,9 +49,10 @@ export default function MyModal() {
     const userName = user.email?.split("@")[0];
     const profileImgURL = user.photoURL
       ? user.photoURL
-      : `https://avatars.dicebear.com/api/adventurer-neutral/:${user.displayName}.svg`;
+      : `https://avatars.dicebear.com/api/adventurer-neutral/:${userName}.svg`;
     // #1 Creates a documents collection in the firebase Cloud Firestore
     const docRef = await addDoc(collection(db, "posts"), {
+      userId: user.uid,
       username: userName,
       profileImg: profileImgURL,
       caption: captionRef.current.value,

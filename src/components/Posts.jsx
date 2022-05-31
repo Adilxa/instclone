@@ -26,6 +26,7 @@ function Posts() {
         <Post
           key={post.id}
           id={post.id}
+          userId={post.data().userId}
           username={post.data().username}
           userImg={post.data().profileImg}
           postImg={post.data().postImage}

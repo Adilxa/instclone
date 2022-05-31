@@ -6,6 +6,7 @@ import {
   EmojiHappyIcon,
   HeartIcon as HeartOutlinedIcon,
   PaperAirplaneIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
 import {
   addDoc,
@@ -24,12 +25,22 @@ import { useUserAuth } from "../context/UserAuthContextProvider";
 import { db } from "../firebase/firebase-config";
 import Moment from "react-moment";
 
-function Post({ id, username, userImg, postImg, caption }) {
+function Post({ id, userId, username, userImg, postImg, caption }) {
   const { user } = useUserAuth();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+  const [myPost, setMyPost] = useState(false);
+
+  useEffect(() => {
+    if (userId === user.uid) {
+      setMyPost(true);
+    }
+  }, [db]);
+  // console.log(myPost);
+  // console.log("Post UID", userId);
+  // console.log("Logged user UID", user.uid);
 
   // This gets the Likes from the Firebase Cloud Firestore Realtime.
   useEffect(
@@ -95,6 +106,11 @@ function Post({ id, username, userImg, postImg, caption }) {
     });
   };
 
+  const deleteMyPost = async () => {
+    console.log("delete me");
+    await deleteDoc(doc(db, "posts", id));
+  };
+
   return (
     <div className="bg-white my-3 sm:my-7 border rounded-sm">
       {/* Header */}
@@ -105,7 +121,14 @@ function Post({ id, username, userImg, postImg, caption }) {
           alt={username}
         />
         <p className="flex-1 font-bold">{username}</p>
-        <DotsHorizontalIcon className="h-7 cursor-pointer" />
+        {myPost ? (
+          <TrashIcon
+            onClick={deleteMyPost}
+            className="h-7 text-red-500 cursor-pointer"
+          />
+        ) : (
+          <DotsHorizontalIcon className="h-7" />
+        )}
       </div>
       {/* Post Image */}
       <img className="object-cover w-full" src={postImg} alt={username} />
@@ -132,7 +155,7 @@ function Post({ id, username, userImg, postImg, caption }) {
         </div>
       </div>
       {/* Caption */}
-      <p className="p-3 truncate">
+      <p className="p-3">
         {likes.length > 0 && (
           <span className="font-bold">{likes.length} likes</span>
         )}
@@ -154,7 +177,7 @@ function Post({ id, username, userImg, postImg, caption }) {
                 src={comment.data().userImg}
                 alt={comment.data().username}
               />
-              <p className="text-sm flex-1 truncate">
+              <p className="text-sm flex-1">
                 <span className="font-bold">@{comment.data().username} </span>
                 {comment.data().comment}
               </p>
