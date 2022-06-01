@@ -8,8 +8,8 @@ export const storiesData = [
   {
     id: "f5ebb8eb0f2dd55d1964b04f",
     userAvatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqbT5pkZIrfJL6dymTUMjw1zNgQrEat6_WQ&usqp=CAU",
-    userName: "Don",
+      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    userName: "Edward",
   },
   {
     id: "1bf645e9c30beb32ace7fefe",
@@ -20,8 +20,8 @@ export const storiesData = [
   {
     id: "b9f74ba3eb9bfc7b0c8fa4ec",
     userAvatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsR8xX6OXZE3QYOXvIaluDU76RFX7CJ15_5A&usqp=CAU",
-    userName: "Pappu",
+      "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    userName: "Kimson_Doan",
   },
   {
     id: "7556d7b07957dccd2dafcefb",
@@ -32,8 +32,8 @@ export const storiesData = [
   {
     id: "fad47822c455acc0e52de",
     userAvatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Ke3w1L0aUYbp-57F704QAuvYSm_WjCGusA&usqp=CAU",
-    userName: "Amitabh Bacchan",
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    userName: "Ayo.Ogunseinde",
   },
   {
     id: "af7fc4dbf74dda2d8bdbab8e",

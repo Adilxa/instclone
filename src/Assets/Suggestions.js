@@ -2,9 +2,9 @@ export const SuggestionsList = [
   {
     id: "de5e3a0ce050e9cc6cb26ea1",
     userAvatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU1_sf9JEAP0CgU7C9TvEZpBLcPk_1mx97xg&usqp=CAU+9",
-    userName: "Ram_Nath_Kovind",
-    worksAt: "Rashtrapati Bhawan - India",
+      "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHByb2ZpbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    userName: "Tom_Bradon_69",
+    worksAt: "Microsoft INC - California",
   },
   {
     id: "e42dcbb5727b9643c4fccbba",
@@ -30,8 +30,8 @@ export const SuggestionsList = [
   {
     id: "fec8aefe77b3d9dc3afeb2be",
     userAvatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqbT5pkZIrfJL6dymTUMjw1zNgQrEat6_WQ&usqp=CAU",
-    userName: "Narendra_Modi",
-    worksAt: "Mann ki Baat - India",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    userName: "Jazzy_Fransis",
+    worksAt: "Doulis - Russia",
   },
 ];
