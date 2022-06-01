@@ -37,6 +37,7 @@ function Post({ id, userId, username, userImg, postImg, caption }) {
     if (userId === user.uid) {
       setMyPost(true);
     }
+    // eslint-disable-next-line
   }, [db]);
   // console.log(myPost);
   // console.log("Post UID", userId);
@@ -91,12 +92,11 @@ function Post({ id, userId, username, userImg, postImg, caption }) {
     setComment("");
     const commentToSend = comment;
 
+    const userName = user.email?.split("@")[0];
     // If the user is not signed in from the Google then profile photo is Provided by "https://avatars.dicebear.com" API, and the username extracted from the users Email id...
     const profileImgURL = user.photoURL
       ? user.photoURL
-      : `https://avatars.dicebear.com/api/adventurer-neutral/:${user.displayName}.svg`;
-
-    const userName = user.email?.split("@")[0];
+      : `https://avatars.dicebear.com/api/adventurer-neutral/:${userName}.svg`;
 
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: commentToSend,
@@ -114,7 +114,7 @@ function Post({ id, userId, username, userImg, postImg, caption }) {
   return (
     <div className="bg-white my-3 sm:my-7 border rounded-sm">
       {/* Header */}
-      <div className="flex items-center p-3 cursor-pointer">
+      <div className="flex items-center p-3">
         <img
           className="rounded-full h-12 w-12 object-contain border-2 border-red-500 p-[2px] mr-3 cursor-pointer"
           src={userImg}
