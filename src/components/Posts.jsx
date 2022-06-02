@@ -31,6 +31,8 @@ function Posts() {
           userImg={post.data().profileImg}
           postImg={post.data().postImage}
           caption={post.data().caption}
+          fileType={post.data().fileType}
+          fileFormat={post.data().fileFormat}
         />
       ))}
       <Note />

@@ -12,6 +12,7 @@ import { useUserAuth } from "../context/UserAuthContextProvider";
 import { db, storage } from "../firebase/firebase-config";
 import { uploadString, getDownloadURL, ref } from "firebase/storage";
 import UploadLoader from "../Assets/Images/upload-loader.svg";
+import ReactPlayer from "react-player";
 
 export default function MyModal() {
   const { modelOpen, setModelOpen, user } = useUserAuth();
@@ -19,6 +20,8 @@ export default function MyModal() {
   const captionRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [fileType, setFileType] = useState("");
+  const [fileFormat, setFileFormat] = useState("");
 
   // var FileReader: new () => FileReader
   // Lets web applications asynchronously read the contents of files (or raw data buffers) stored on the user's computer
@@ -30,6 +33,14 @@ export default function MyModal() {
     // FileReader provides .onload event, that triggers after user selects a file that to be uploaded
     reader.onload = (readerEvent) => {
       setSelectedFile(readerEvent.target.result);
+      var match = reader.result.match(/^data:([^/]+)\/([^;]+);/) || [];
+      var type = match[1];
+      var format = match[2];
+      setFileType(type);
+      setFileFormat(format);
+      // console.log(type);
+      // console.log(format);
+      // console.log(reader.result);
     };
   };
 
@@ -57,6 +68,8 @@ export default function MyModal() {
       profileImg: profileImgURL,
       caption: captionRef.current.value,
       timestamp: serverTimestamp(),
+      fileType: fileType,
+      fileFormat: fileFormat,
     });
     // #2 We get a documents ID
     // console.log("New doc Added with ID", docRef.id);
@@ -111,13 +124,27 @@ export default function MyModal() {
               >
                 <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-white p-6 shadow-xl transition-all flex flex-col justify-center items-center space-y-2">
                   {selectedFile ? (
-                    // eslint-disable-next-line
-                    <img
-                      src={selectedFile}
-                      alt="Select Photo To Upload on Post"
-                      className="w-full max-h-[30rem] object-contain cursor-pointer"
-                      onClick={() => setSelectedFile(null)}
-                    />
+                    fileType === "image" ? (
+                      // eslint-disable-next-line
+                      <img
+                        src={selectedFile}
+                        alt="Select Photo To Upload on Post"
+                        className="w-full max-h-[30rem] object-contain cursor-pointer"
+                        onClick={() => setSelectedFile(null)}
+                      />
+                    ) : (
+                      <ReactPlayer
+                        url={selectedFile}
+                        width="100%"
+                        height="100%"
+                        playing={true}
+                        controls={true}
+                        volume={1}
+                        loop={true}
+                        className="w-full max-h-[30rem] object-contain cursor-pointer"
+                        onClick={() => setSelectedFile(null)}
+                      />
+                    )
                   ) : (
                     <div
                       onClick={() => filePickerRef.current.click()}

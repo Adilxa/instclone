@@ -22,16 +22,32 @@ import {
 import { HeartIcon as HeartSolidIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { useUserAuth } from "../context/UserAuthContextProvider";
-import { db } from "../firebase/firebase-config";
+import { db, storage } from "../firebase/firebase-config";
 import Moment from "react-moment";
+import { deleteObject, ref } from "firebase/storage";
+import ReactPlayer from "react-player";
 
-function Post({ id, userId, username, userImg, postImg, caption }) {
+function Post({
+  id,
+  userId,
+  username,
+  userImg,
+  postImg,
+  caption,
+  fileType,
+  fileFormat,
+}) {
   const { user } = useUserAuth();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
   const [myPost, setMyPost] = useState(false);
+
+  const ourFileType = fileType === undefined ? "image" : "video";
+
+  // console.log(ourFileType);
+  // console.log(fileType);
 
   useEffect(() => {
     if (userId === user.uid) {
@@ -105,10 +121,13 @@ function Post({ id, userId, username, userImg, postImg, caption }) {
       userImg: profileImgURL,
     });
   };
-
+  // Deletes the post from Firebase.
   const deleteMyPost = async () => {
-    console.log("delete me");
+    // This is to delete from firebase cloud firestore
     await deleteDoc(doc(db, "posts", id));
+    // This is to delete from firebase storage
+    const imagesRef = ref(storage, `posts/${id}/image`);
+    await deleteObject(imagesRef);
   };
 
   return (
@@ -131,7 +150,18 @@ function Post({ id, userId, username, userImg, postImg, caption }) {
         )}
       </div>
       {/* Post Image */}
-      <img className="object-cover w-full" src={postImg} alt={username} />
+      {ourFileType === "image" ? (
+        <img className="object-cover w-full" src={postImg} alt={username} />
+      ) : (
+        <ReactPlayer
+          url={postImg}
+          width="100%"
+          height="100%"
+          playing={false}
+          controls={true}
+          volume={1}
+        />
+      )}
       {/* Buttons */}
       <div className="flex justify-between items-center px-4 pt-4">
         <div className="flex items-center space-x-4">
@@ -156,9 +186,7 @@ function Post({ id, userId, username, userImg, postImg, caption }) {
       </div>
       {/* Caption */}
       <p className="p-3">
-        {likes.length > 0 && (
-          <span className="font-bold">{likes.length} likes</span>
-        )}
+        <span className="font-bold">{likes.length} likes</span>
         <br />
         <span className="font-bold">@{username} </span>
         {caption}
