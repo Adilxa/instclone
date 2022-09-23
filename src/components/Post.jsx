@@ -44,11 +44,6 @@ function Post({
   const [hasLiked, setHasLiked] = useState(false);
   const [myPost, setMyPost] = useState(false);
 
-  const ourFileType = fileType === undefined ? "image" : "video";
-
-  // console.log(ourFileType);
-  // console.log(fileType);
-
   useEffect(() => {
     if (userId === user.uid) {
       setMyPost(true);
@@ -150,7 +145,7 @@ function Post({
         )}
       </div>
       {/* Post Image */}
-      {ourFileType === "image" ? (
+      {fileType === "image" || fileType === undefined ? (
         <img className="object-cover w-full" src={postImg} alt={username} />
       ) : (
         <ReactPlayer
