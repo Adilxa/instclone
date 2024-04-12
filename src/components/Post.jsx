@@ -107,7 +107,7 @@ function Post({
     // If the user is not signed in from the Google then profile photo is Provided by "https://avatars.dicebear.com" API, and the username extracted from the users Email id...
     const profileImgURL = user.photoURL
       ? user.photoURL
-      : `https://avatars.dicebear.com/api/adventurer-neutral/:${userName}.svg`;
+      : `https://api.dicebear.com/8.x/pixel-art/svg?seed=${userName}.svg`;
 
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: commentToSend,

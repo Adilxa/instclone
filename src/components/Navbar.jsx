@@ -69,7 +69,7 @@ function Navbar() {
               src={
                 user?.photoURL
                   ? user.photoURL
-                  : `https://avatars.dicebear.com/api/adventurer-neutral/:${userName}.svg`
+                  : `https://api.dicebear.com/8.x/pixel-art/svg?seed=${userName}.svg`
               }
               alt={user?.displayName}
             />
